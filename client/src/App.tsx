@@ -1,16 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import LoginOrOut from "./components/LoginOrOut";
+import Profile from "./components/Profile";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <h1>ImageSearch App</h1>
+      <Profile />
+      <LoginOrOut />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
