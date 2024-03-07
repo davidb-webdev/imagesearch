@@ -1,22 +1,26 @@
 import { MouseEvent, useState } from "react";
-import { SearchResult } from "../models/searchResults";
+import { SearchResult } from "../models/SearchResult.ts";
+import { SearchInformation } from "../models/searchInformation.ts";
 
 const ImageSearch = () => {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [searchInformation, setSearchInformation] =
+    useState<SearchInformation>();
   const [query, setQuery] = useState("");
+
   const search = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const url =
-      "https://customsearch.googleapis.com/customsearch/v1?key=" +
+      "https://customsearch.googleapis.com/customsearch/v1?searchType=image&key=" +
       import.meta.env.VITE_GCS_KEY +
       "&cx=" +
       import.meta.env.VITE_GCS_SEARCH_ENGINE_ID +
-      "&searchType=image" +
       "&q=" +
       query;
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
+    setSearchInformation(data.searchInformation);
     setSearchResults(data.items);
   };
 
@@ -32,8 +36,12 @@ const ImageSearch = () => {
         />
         <button onClick={search}>Search</button>
       </form>
+      <p>
+        {searchInformation &&
+          `Found ${searchInformation.formattedTotalResults} results in ${searchInformation.formattedSearchTime} seconds`}
+      </p>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {searchResults.map((result: SearchResult) => {
+        {searchResults.map((result) => {
           return (
             <div>
               <img
