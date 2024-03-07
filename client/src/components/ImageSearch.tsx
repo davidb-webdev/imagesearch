@@ -1,5 +1,6 @@
 import { MouseEvent, useState } from "react";
 import { SearchResponse } from "../models/SearchResponse";
+import "../styles/ImageSearch.css";
 
 const ImageSearch = () => {
   const [searchResponse, setSearchResponse] = useState<SearchResponse>();
@@ -58,26 +59,18 @@ const ImageSearch = () => {
         </p>
       )}
 
-      {searchResponse?.items && (
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {searchResponse.items.map((result, index) => {
-            return (
-              <div key={index}>
-                <img
-                  src={result.link}
-                  alt={result.title}
-                  style={{
-                    width: "auto",
-                    height: "auto",
-                    maxWidth: "400px",
-                    maxHeight: "200px",
-                  }}
-                />
-              </div>
-            );
-          })}
-        </div>
-      )}
+      <div className="searchResults">
+        {searchResponse?.items.map((result) => {
+          return (
+            <div key={result.link} className="resultDiv">
+              <img
+                src={result.link}
+                alt={result.title}
+              />
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };
