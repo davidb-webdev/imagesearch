@@ -1,13 +1,14 @@
 import { MouseEvent, useState } from "react";
-import { SearchResult } from "../models/SearchResult";
-import { SearchInfo } from "../models/SearchInfo";
+import { SearchResponse } from "../models/SearchResponse";
 
 const ImageSearch = () => {
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [searchInfo, setSearchInfo] = useState<SearchInfo>();
+  const [searchResponse, setSearchResponse] = useState<SearchResponse>();
   const [query, setQuery] = useState("");
 
-  const search = async (e: MouseEvent<HTMLButtonElement>) => {
+  const search = async (
+    e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+    optionalQueryParam?: string
+  ) => {
     e.preventDefault();
     const url =
       "https://customsearch.googleapis.com/customsearch/v1?searchType=image&key=" +
@@ -15,12 +16,11 @@ const ImageSearch = () => {
       "&cx=" +
       import.meta.env.VITE_GCS_SEARCH_ENGINE_ID +
       "&q=" +
-      query;
+      (optionalQueryParam ? optionalQueryParam : query);
     const response = await fetch(url);
-    const data = await response.json();
+    const data: SearchResponse = await response.json();
     console.log(data);
-    setSearchInfo(data.searchInformation);
-    setSearchResults(data.items);
+    setSearchResponse(data);
   };
 
   return (
@@ -35,28 +35,49 @@ const ImageSearch = () => {
         />
         <button onClick={search}>Search</button>
       </form>
-      <p>
-        {searchInfo &&
-          `Found ${searchInfo.formattedTotalResults} results in ${searchInfo.formattedSearchTime} seconds`}
-      </p>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {searchResults.map((result) => {
-          return (
-            <div>
-              <img
-                src={result.link}
-                alt={result.title}
-                style={{
-                  width: "auto",
-                  height: "auto",
-                  maxWidth: "400px",
-                  maxHeight: "200px",
-                }}
-              />
-            </div>
-          );
-        })}
-      </div>
+
+      {searchResponse?.searchInformation && (
+        <p>
+          Found {searchResponse.searchInformation.formattedTotalResults} results
+          in {searchResponse.searchInformation.formattedSearchTime} seconds
+        </p>
+      )}
+
+      {searchResponse?.spelling && (
+        <p>
+          Did you mean{" "}
+          <button
+            onClick={(e) => {
+              setQuery(searchResponse.spelling.correctedQuery);
+              search(e, searchResponse.spelling.correctedQuery);
+            }}
+          >
+            {searchResponse.spelling.correctedQuery}
+          </button>
+          ?
+        </p>
+      )}
+
+      {searchResponse?.items && (
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {searchResponse.items.map((result, index) => {
+            return (
+              <div key={index}>
+                <img
+                  src={result.link}
+                  alt={result.title}
+                  style={{
+                    width: "auto",
+                    height: "auto",
+                    maxWidth: "400px",
+                    maxHeight: "200px",
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 };
