@@ -1,4 +1,4 @@
-export interface SearchInformation {
+export interface SearchInfo {
   formattedSearchTime: string;
   formattedTotalResults: string;
   searchTime: number;

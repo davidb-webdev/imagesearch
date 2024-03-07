@@ -1,11 +1,10 @@
 import { MouseEvent, useState } from "react";
-import { SearchResult } from "../models/SearchResult.ts";
-import { SearchInformation } from "../models/searchInformation.ts";
+import { SearchResult } from "../models/SearchResult";
+import { SearchInfo } from "../models/SearchInfo";
 
 const ImageSearch = () => {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [searchInformation, setSearchInformation] =
-    useState<SearchInformation>();
+  const [searchInfo, setSearchInfo] = useState<SearchInfo>();
   const [query, setQuery] = useState("");
 
   const search = async (e: MouseEvent<HTMLButtonElement>) => {
@@ -20,7 +19,7 @@ const ImageSearch = () => {
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
-    setSearchInformation(data.searchInformation);
+    setSearchInfo(data.searchInformation);
     setSearchResults(data.items);
   };
 
@@ -37,8 +36,8 @@ const ImageSearch = () => {
         <button onClick={search}>Search</button>
       </form>
       <p>
-        {searchInformation &&
-          `Found ${searchInformation.formattedTotalResults} results in ${searchInformation.formattedSearchTime} seconds`}
+        {searchInfo &&
+          `Found ${searchInfo.formattedTotalResults} results in ${searchInfo.formattedSearchTime} seconds`}
       </p>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {searchResults.map((result) => {
