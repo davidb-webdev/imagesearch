@@ -6,10 +6,14 @@ import Profile from "./components/Profile";
 function App() {
   return (
     <>
-      <h1>ImageSearch App</h1>
-      <ImageSearch />
-      <Profile />
-      <LoginOrOut />
+      <header>
+        <h1>ImageSearch App</h1>
+        <Profile />
+        <LoginOrOut />
+      </header>
+      <main>
+        <ImageSearch />
+      </main>
     </>
   );
 }
