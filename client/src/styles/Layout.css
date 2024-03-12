@@ -1,0 +1,81 @@
+:root {
+	/* Dimensions */
+	--header-height: 5rem;
+	--default-spacing: 1rem;
+	--page-max-width: 75rem;
+
+	/* Colors */
+	--text-color: #fff;
+	--light-bg-color: #29231f;
+	--dark-bg-color: #221d1a;
+	--accent-color: #d45d14;
+
+	/* Timing */
+	--quick: 0.15s;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: "Poppins", sans-serif;
+	color: var(--text-color);
+}
+
+#root {
+	header {
+		padding: var(--default-spacing);
+		background-color: var(--light-bg-color);
+		display: grid;
+    	justify-content: center;
+		align-items: center;
+		gap: var(--default-spacing);
+		grid-template-rows: calc(var(--header-height) - 2 * var(--default-spacing));
+		grid-template-columns: /* set children's max width to fractions of page max width */
+			minmax(auto, calc(var(--page-max-width) * 2 / 3))
+			minmax(auto, calc(var(--page-max-width) / 3))
+		;
+
+		nav, .userLinks {
+			display: flex;
+			align-items: center;
+			height: 100%;
+			gap: var(--default-spacing);
+		}
+
+		.userLinks {
+			justify-content: end;
+		}
+
+		img {
+			height: 100%;
+		}
+
+		a, button {
+			color: var(--text-color);
+			text-decoration: none;
+			background: none;
+			border: none;
+			font-size: 1rem;
+			cursor: pointer;
+			transition: color var(--quick);
+
+			&:hover {
+				color: var(--accent-color);
+			}
+		}
+	}
+
+	main {
+		min-height: calc(100vh - var(--header-height));
+		padding: var(--default-spacing);
+		background-color: var(--dark-bg-color);
+
+		display: grid;
+		grid-template-columns: auto;
+    	justify-content: center;
+		align-items: center;
+	}
+}

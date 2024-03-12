@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from "react";
-import { SearchResponse } from "../models/SearchResponse";
+import SearchResponse from "../models/SearchResponse";
 import "../styles/ImageSearch.css";
 
 const ImageSearch = () => {
