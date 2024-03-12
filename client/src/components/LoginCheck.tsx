@@ -1,11 +1,12 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./LoginButton";
 
-interface IPromptLoginProps {
+interface ILoginCheckProps {
   children: React.ReactNode;
+  promptLogin?: boolean;
 }
 
-const PromptLogin = ({children}: IPromptLoginProps) => {
+const LoginCheck = ({children, promptLogin}: ILoginCheckProps) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
@@ -17,10 +18,10 @@ const PromptLogin = ({children}: IPromptLoginProps) => {
       {user !== undefined && isAuthenticated ? (
         children
       ) : (
-        <LoginButton />
+        promptLogin && <LoginButton />
       )}
     </>
   );
 };
 
-export default PromptLogin;
+export default LoginCheck;

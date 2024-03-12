@@ -1,7 +1,6 @@
-import { Outlet } from "react-router-dom";
-import Navigation from "../components/Navigation";
+import { NavLink, Outlet } from "react-router-dom";
 import Profile from "../components/Profile";
-import PromptLogin from "../components/PromptLogin";
+import LoginCheck from "../components/LoginCheck";
 import "../styles/Layout.css";
 import LogoutButton from "../components/LogoutButton";
 
@@ -9,15 +8,25 @@ const Layout = () => {
   return (
     <>
       <header>
-        <Navigation />
-        <PromptLogin>
-          <Profile />
-          <LogoutButton />
-        </PromptLogin>
+        <nav>
+          <NavLink to="/">Home</NavLink>
+          <LoginCheck>
+            <NavLink to="/favorites">Favorites</NavLink>
+          </LoginCheck>
+        </nav>
+
+        <div className="userLinks">
+          <LoginCheck promptLogin>
+            <Profile />
+            <LogoutButton />
+          </LoginCheck>
+        </div>
       </header>
 
       <main>
-        <Outlet />
+        <LoginCheck promptLogin>
+          <Outlet />
+        </LoginCheck>
       </main>
     </>
   );
