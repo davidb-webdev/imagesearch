@@ -1,6 +1,6 @@
-import { SearchItem } from "./SearchItem";
+import SearchItem from "./SearchItem";
 
-export interface SearchResponse {
+interface SearchResponse {
 	items: SearchItem[];
 	searchInformation: {
 		formattedSearchTime: string;
@@ -13,3 +13,5 @@ export interface SearchResponse {
 		htmlCorrectedQuery: string;
 	};
 }
+
+export default SearchResponse;

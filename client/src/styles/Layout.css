@@ -35,9 +35,14 @@ body {
 			justify-content: center;
 		}
 
-		a {
+		a, button {
 			color: var(--text-color);
 			text-decoration: none;
+			background: none;
+			border: none;
+			font-size: 1rem;
+			cursor: pointer;
+			transition: color 0.15s;
 
 			&:hover {
 				color: var(--accent-color);
