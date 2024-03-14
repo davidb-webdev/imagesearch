@@ -1,0 +1,17 @@
+[
+  {
+    "user": "missingno",
+    "favoriteImages": [
+      {
+        "title": "faketitle",
+        "byteSize": 2832098,
+        "url": "http://1"
+      },
+      {
+        "title": "faketitle",
+        "byteSize": 2832098,
+        "url": "http://2"
+      }
+    ]
+  }
+]

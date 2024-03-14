@@ -1,23 +1,31 @@
+const fs = require("fs").promises;
 const express = require("express");
 require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use("/favorites", (req, res, next) => {
-	// Validate user
-	console.log('User validation!');
-	next();
+const readFavorites = async () => {
+	const data = await fs.readFile("./favorites.json");
+	return JSON.parse(data);
+}
+
+const writeFavorites = async (content) => {
+	await fs.writeFile("./favorites.json", JSON.stringify(content, null, 2));
+}
+
+app.use(express.json());
+
+app.get("/favorites", async (req, res) => {
+	const favorites = await readFavorites();
+	res.status(200).json(favorites);
 });
 
-app.get("/favorites", (req, res) => {
-	// Send favorites for specific user
-	res.status(200).json("These are your favorites!");
-});
+app.post("/favorites", async (req, res) => {
+	const favorites = await readFavorites();
+	favorites.push(req.body);
+	writeFavorites(favorites);
 
-app.post("/favorites", (req, res) => {
-	express.json(); // parse request body (is undefined otherwise)
-	// Save to user's favorites
 	res.status(200).json("Favorites saved!");
 });
 
