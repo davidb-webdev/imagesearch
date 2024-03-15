@@ -11,31 +11,27 @@ const writeFavorites = async (content) => {
 
 const getFavorites = async (req, res) => {
 	const favorites = await readFavorites();
-
 	for (const userObject of favorites) {
 		if (userObject.user === req.params.user) {
 			return res.status(200).json(userObject.favoriteImages);
 		}
 	}
-
 	res.status(404).json("User not found");
 }
 
 const addFavorite = async (req, res) => {
 	const favorites = await readFavorites();
 	
-	// Check if user exists
 	for (const userObject of favorites) {
 		if (userObject.user === req.body.user) {
 			userObject.favoriteImages.push(req.body.favoriteImages[0]);
-			writeFavorites(favorites);
+			await writeFavorites(favorites);
 			return res.status(200).json("Favorite added");
 		}
 	}
 
-	// User doesn't exist
 	favorites.push(req.body);
-	writeFavorites(favorites);
+	await writeFavorites(favorites);
 	res.status(200).json("Favorite added");
 }
 

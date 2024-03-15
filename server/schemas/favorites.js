@@ -9,4 +9,4 @@ const addFavoriteSchema = Joi.object({
 	}).required().min(1).max(1)
 });
 
-module.exports = {addFavoriteSchema}
+module.exports = {addFavoriteSchema};
