@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const addFavoriteSchema = Joi.object({
+const userFavoriteSchema = Joi.object({
 	user: Joi.string().required(),
 	favoriteImages: Joi.array().items({
 		title: Joi.string().required(),
@@ -9,4 +9,4 @@ const addFavoriteSchema = Joi.object({
 	}).required().min(1).max(1)
 });
 
-module.exports = {addFavoriteSchema};
+module.exports = {userFavoriteSchema};
