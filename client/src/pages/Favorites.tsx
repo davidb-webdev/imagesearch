@@ -1,7 +1,9 @@
+import FavoriteImagesList from "../components/FavoriteImagesList";
+
 const Favorites = () => {
   document.title = "Favorites – ImageSearch";
 
-  return <p>Favorites!</p>;
+  return <FavoriteImagesList />;
 };
 
 export default Favorites;
