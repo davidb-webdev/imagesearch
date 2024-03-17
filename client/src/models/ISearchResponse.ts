@@ -1,12 +1,12 @@
-import SearchItem from "./SearchItem";
+import ISearchItem from "./ISearchItem";
 
-interface SearchResponse {
+export default interface ISearchResponse {
 	context: {
 		title: string;
 	}
-	items: SearchItem[];
+	items: ISearchItem[];
 	kind: string;
-	queries: Queries;
+	queries: IQueries;
 	searchInformation: {
 		formattedSearchTime: string;
 		formattedTotalResults: string;
@@ -23,7 +23,7 @@ interface SearchResponse {
   }
 }
 
-interface Queries {
+interface IQueries {
   previousPage?: [
     {
       title: string;
@@ -145,6 +145,4 @@ interface Queries {
     }
   ]
 }
-
-export default SearchResponse;
 

@@ -1,4 +1,4 @@
-class PostFavorite {
+export default class Favorite {
 	constructor(
 		public user: string,
 		public favoriteImages: [
@@ -10,5 +10,3 @@ class PostFavorite {
 		]
 	) {}
 }
-
-export default PostFavorite;

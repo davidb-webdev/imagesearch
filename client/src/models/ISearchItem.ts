@@ -1,4 +1,4 @@
-interface SearchItem {
+export default interface ISearchItem {
   displayLink: string;
   fileFormat: string;
   htmlSnippet: string;
@@ -18,5 +18,3 @@ interface SearchItem {
   snippet: string;
   title: string;
 }
-
-export default SearchItem;

@@ -1,10 +1,10 @@
 import { MouseEvent, useState } from "react";
-import SearchResponse from "../models/SearchResponse";
+import ISearchResponse from "../models/ISearchResponse";
+import Favorite from "../models/Favorite";
 import "../styles/ImageSearch.css";
-import PostFavorite from "../models/PostFavorite";
 
 const ImageSearch = () => {
-  const [searchResponse, setSearchResponse] = useState<SearchResponse>();
+  const [searchResponse, setSearchResponse] = useState<ISearchResponse>();
   const [query, setQuery] = useState("");
 
   const search = async (
@@ -20,7 +20,7 @@ const ImageSearch = () => {
       "&q=" +
       (optionalQueryParam ? optionalQueryParam : query);
     const response = await fetch(url);
-    const data: SearchResponse = await response.json();
+    const data: ISearchResponse = await response.json();
     console.log(data);
     setSearchResponse(data);
   };
@@ -32,7 +32,7 @@ const ImageSearch = () => {
   ) => {
     const url = import.meta.env.VITE_FAVORITES_BASE_URL + "/add";
     const user = "numberOne";
-    const body = new PostFavorite(user, [
+    const body = new Favorite(user, [
       {
         title,
         byteSize,
