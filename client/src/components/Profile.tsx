@@ -4,11 +4,10 @@ const Profile = () => {
   const { user } = useAuth0();
 
   return (
-      <>
-        <img src={user?.picture} alt={user?.name} />
-        <span>{user?.name}</span>
-        {/* <p>{user?.email}</p> */}
-      </>
+    <>
+      <img src={user?.picture} alt={user?.name} />
+      <span>{user?.name || user?.nickname}</span>
+    </>
   );
 };
 

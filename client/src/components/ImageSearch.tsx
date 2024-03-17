@@ -2,8 +2,10 @@ import { MouseEvent, useState } from "react";
 import ISearchResponse from "../models/ISearchResponse";
 import Favorite from "../models/Favorite";
 import "../styles/ImageSearch.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ImageSearch = () => {
+  const { user } = useAuth0();
   const [searchResponse, setSearchResponse] = useState<ISearchResponse>();
   const [query, setQuery] = useState("");
 
@@ -30,9 +32,9 @@ const ImageSearch = () => {
     byteSize: number,
     imageUrl: string
   ) => {
+    if (!user || !user.sub) return false;
     const url = import.meta.env.VITE_FAVORITES_BASE_URL + "/add";
-    const user = "numberOne";
-    const body = new Favorite(user, [
+    const body = new Favorite(user.sub, [
       {
         title,
         byteSize,
@@ -93,11 +95,7 @@ const ImageSearch = () => {
               <img src={result.link} alt={result.title} />
               <button
                 onClick={() => {
-                  addFavorite(
-                    result.title,
-                    result.image.byteSize,
-                    result.link
-                  );
+                  addFavorite(result.title, result.image.byteSize, result.link);
                 }}
               >
                 Save to favorites
