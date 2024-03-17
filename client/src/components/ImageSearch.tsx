@@ -15,7 +15,8 @@ const ImageSearch = () => {
   ) => {
     e.preventDefault();
     const url =
-      "https://customsearch.googleapis.com/customsearch/v1?searchType=image&key=" +
+      import.meta.env.VITE_GCS_BASE_URL +
+      "&key=" +
       import.meta.env.VITE_GCS_KEY +
       "&cx=" +
       import.meta.env.VITE_GCS_SEARCH_ENGINE_ID +
@@ -33,7 +34,7 @@ const ImageSearch = () => {
     imageUrl: string
   ) => {
     if (!user || !user.sub) return false;
-    const url = import.meta.env.VITE_FAVORITES_BASE_URL + "/add";
+    const url = import.meta.env.VITE_BACKEND_BASE_URL + "/favorites/add";
     const body = new Favorite(user.sub, [
       {
         title,

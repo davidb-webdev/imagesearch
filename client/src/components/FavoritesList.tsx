@@ -4,10 +4,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const FavoritesList = () => {
   const [favorites, setFavorites] = useState<IFavorite[]>([]);
-  const {user} = useAuth0();
+  const { user } = useAuth0();
 
   const getFavorites = async () => {
-    const url = import.meta.env.VITE_FAVORITES_BASE_URL + user?.sub;
+    const url =
+      import.meta.env.VITE_BACKEND_BASE_URL + "/favorites/" + user?.sub;
     const response = await fetch(url);
     const data: IFavorite[] = await response.json();
     setFavorites(data);
