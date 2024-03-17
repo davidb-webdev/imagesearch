@@ -12,7 +12,7 @@ const writeFavorites = async (content) => {
 const getFavorites = async (req, res) => {
   const favorites = await readFavorites();
   for (const userObject of favorites) {
-    if (userObject.user === req.params.user) {
+    if (userObject.user === req.headers["user-id"]) {
       return res.status(200).json(userObject.favoriteImages);
     }
   }
@@ -20,35 +20,38 @@ const getFavorites = async (req, res) => {
 };
 
 const addFavorite = async (req, res) => {
-  const favorites = await readFavorites();
+  if (req.headers["user-id"]) {
+    const favorites = await readFavorites();
 
-  for (const userObject of favorites) {
-    if (userObject.user === req.body.user) {
-      userObject.favoriteImages.push(req.body.favoriteImages[0]);
-      await writeFavorites(favorites);
-      return res.status(200).json("Favorite added");
+    for (const userObject of favorites) {
+      if (userObject.user === req.headers["user-id"]) {
+        userObject.favoriteImages.push(req.body);
+        await writeFavorites(favorites);
+        return res.status(200).json("Favorite added");
+      }
     }
-  }
 
-  favorites.push(req.body);
-  await writeFavorites(favorites);
-  res.status(200).json("Favorite added");
+    favorites.push({ user: req.headers["user-id"], favoriteImages: req.body });
+    await writeFavorites(favorites);
+    res.status(200).json("Favorite added");
+  }
+  res.status(401).json("Unauthorized");
 };
 
 const removeFavorite = async (req, res) => {
   let favorites = await readFavorites();
   for (const userObject of favorites) {
-    if (userObject.user === req.body.user) {
+    if (userObject.user === req.headers["user-id"]) {
       userObject.favoriteImages = userObject.favoriteImages.filter(
         (userFavorite) => {
-          return userFavorite.url !== req.body.favoriteImages[0].url;
+          return userFavorite.url !== req.body.url;
         }
       );
+      await writeFavorites(favorites);
+      return res.status(200).json("Favorite removed");
     }
   }
-
-  await writeFavorites(favorites);
-  return res.status(200).json("Favorite removed");
+  res.status(404).json("Favorite not found");
 };
 
 module.exports = { getFavorites, addFavorite, removeFavorite };

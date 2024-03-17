@@ -1,5 +1,5 @@
 export default interface IFavorite {
-	title: string,
-	byteSize: number,
+	title: string;
+	byteSize: number;
 	url: string;
 }

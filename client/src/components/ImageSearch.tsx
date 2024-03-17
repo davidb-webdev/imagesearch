@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
 import ISearchResponse from "../models/ISearchResponse";
-import UserFavorites from "../models/UserFavorites";
+import Favorite from "../models/Favorite";
 import "../styles/ImageSearch.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -11,7 +11,7 @@ const ImageSearch = () => {
 
   const search = async (
     e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-    optionalQueryParam?: string
+    queryParameter?: string
   ) => {
     e.preventDefault();
     const url =
@@ -21,7 +21,7 @@ const ImageSearch = () => {
       "&cx=" +
       import.meta.env.VITE_GCS_SEARCH_ENGINE_ID +
       "&q=" +
-      (optionalQueryParam ? optionalQueryParam : query);
+      (queryParameter ? queryParameter : query);
     const response = await fetch(url);
     const data: ISearchResponse = await response.json();
     console.log(data);
@@ -35,21 +35,17 @@ const ImageSearch = () => {
   ) => {
     if (!user || !user.sub) return false;
     const url = import.meta.env.VITE_BACKEND_BASE_URL + "/favorites/add";
-    const body = new UserFavorites(user.sub, [
-      {
-        title,
-        byteSize,
-        url: imageUrl,
-      },
-    ]);
-
-    const response = await fetch(url, {
+    const body = new Favorite(title, byteSize, imageUrl);
+    const payload = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "user-id": user.sub
       },
-      body: JSON.stringify(body),
-    });
+      body: JSON.stringify(body)
+    };
+
+    const response = await fetch(url, payload);
     const data = await response.json();
     console.log(data);
   };
