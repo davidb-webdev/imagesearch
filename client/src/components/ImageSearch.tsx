@@ -1,6 +1,7 @@
 import { MouseEvent, useState } from "react";
 import SearchResponse from "../models/SearchResponse";
 import "../styles/ImageSearch.css";
+import PostFavorite from "../models/PostFavorite";
 
 const ImageSearch = () => {
   const [searchResponse, setSearchResponse] = useState<SearchResponse>();
@@ -22,6 +23,32 @@ const ImageSearch = () => {
     const data: SearchResponse = await response.json();
     console.log(data);
     setSearchResponse(data);
+  };
+
+  const addFavorite = async (
+    title: string,
+    byteSize: number,
+    imageUrl: string
+  ) => {
+    const url = import.meta.env.VITE_FAVORITES_BASE_URL + "/add";
+    const user = "numberOne";
+    const body = new PostFavorite(user, [
+      {
+        title,
+        byteSize,
+        url: imageUrl,
+      },
+    ]);
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const data = await response.json();
+    console.log(data);
   };
 
   return (
@@ -49,8 +76,8 @@ const ImageSearch = () => {
           Did you mean{" "}
           <button
             onClick={(e) => {
-              setQuery(searchResponse.spelling.correctedQuery);
-              search(e, searchResponse.spelling.correctedQuery);
+              setQuery(searchResponse.spelling!.correctedQuery);
+              search(e, searchResponse.spelling!.correctedQuery);
             }}
           >
             {searchResponse.spelling.correctedQuery}
@@ -63,10 +90,18 @@ const ImageSearch = () => {
         {searchResponse?.items.map((result) => {
           return (
             <div key={result.link} className="resultDiv">
-              <img
-                src={result.link}
-                alt={result.title}
-              />
+              <img src={result.link} alt={result.title} />
+              <button
+                onClick={() => {
+                  addFavorite(
+                    result.title,
+                    result.image.byteSize,
+                    result.link
+                  );
+                }}
+              >
+                Save to favorites
+              </button>
             </div>
           );
         })}
