@@ -1,10 +1,15 @@
 const express = require("express");
-const { getFavorites, addFavorite } = require("../controllers/favorites");
-const {validate} = require("../validate");
-const { addFavoriteSchema } = require("../schemas/favorites");
+const {
+  getFavorites,
+  addFavorite,
+  removeFavorite
+} = require("../controllers/favorites");
+const { validate } = require("../validate");
+const { userFavoriteSchema } = require("../schemas/favorites");
 const router = express.Router();
 
 router.get("/:user", getFavorites);
-router.post("/add", validate(addFavoriteSchema), addFavorite);
+router.post("/add", validate(userFavoriteSchema), addFavorite);
+router.delete("/remove", validate(userFavoriteSchema), removeFavorite);
 
 module.exports = router;
