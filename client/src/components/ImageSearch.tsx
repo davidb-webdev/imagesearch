@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
 import ISearchResponse from "../models/ISearchResponse";
-import Favorite from "../models/Favorite";
+import UserFavorites from "../models/UserFavorites";
 import "../styles/ImageSearch.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -35,7 +35,7 @@ const ImageSearch = () => {
   ) => {
     if (!user || !user.sub) return false;
     const url = import.meta.env.VITE_BACKEND_BASE_URL + "/favorites/add";
-    const body = new Favorite(user.sub, [
+    const body = new UserFavorites(user.sub, [
       {
         title,
         byteSize,
