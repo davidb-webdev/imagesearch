@@ -1,26 +1,45 @@
-import ISearchItem from "./ISearchItem";
-
 export default interface ISearchResponse {
-	context: {
-		title: string;
-	}
-	items: ISearchItem[];
-	kind: string;
-	queries: IQueries;
-	searchInformation: {
-		formattedSearchTime: string;
-		formattedTotalResults: string;
-		searchTime: number;
-		totalResults: string;
-	};
+  context: {
+    title: string;
+  };
+  items: ISearchItem[];
+  kind: string;
+  queries: IQueries;
+  searchInformation: {
+    formattedSearchTime: string;
+    formattedTotalResults: string;
+    searchTime: number;
+    totalResults: string;
+  };
   spelling?: {
-		correctedQuery: string;
-		htmlCorrectedQuery: string;
-	};
-	url: {
+    correctedQuery: string;
+    htmlCorrectedQuery: string;
+  };
+  url: {
     template: string;
     type: string;
-  }
+  };
+}
+
+interface ISearchItem {
+  displayLink: string;
+  fileFormat: string;
+  htmlSnippet: string;
+  htmlTitle: string;
+  image: {
+    byteSize: number;
+    contextLink: string;
+    height: number;
+    thumbnailHeight: number;
+    thumbnailLink: string;
+    thumbnailWidth: number;
+    width: number;
+  };
+  kind: string;
+  link: string;
+  mime: string;
+  snippet: string;
+  title: string;
 }
 
 interface IQueries {
@@ -61,7 +80,7 @@ interface IQueries {
       imgSize: string;
       imgType: string;
       imgColorType: string;
-      imgDominantColor: string
+      imgDominantColor: string;
     }
   ];
   request: [
@@ -101,7 +120,7 @@ interface IQueries {
       imgSize: string;
       imgType: string;
       imgColorType: string;
-      imgDominantColor: string
+      imgDominantColor: string;
     }
   ];
   nextPage?: [
@@ -141,8 +160,7 @@ interface IQueries {
       imgSize: string;
       imgType: string;
       imgColorType: string;
-      imgDominantColor: string
+      imgDominantColor: string;
     }
-  ]
+  ];
 }
-

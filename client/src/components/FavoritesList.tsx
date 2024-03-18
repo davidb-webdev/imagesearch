@@ -1,20 +1,12 @@
-import { useState } from "react";
-import IFavorite from "../models/IFavorite";
+// import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Url from "../models/Url";
+import useFavorites from "../hooks/useFavorites";
 
 const FavoritesList = () => {
-  const [favorites, setFavorites] = useState<IFavorite[]>([]);
+  // const [favorites, setFavorites] = useState<IFavorite[]>([]);
+  const favorites = useFavorites();
   const { user } = useAuth0();
-
-  const getFavorites = async () => {
-    if (!user || !user.sub) return false;
-    const url = import.meta.env.VITE_BACKEND_BASE_URL + "/favorites/";
-    const payload = {headers: { "user-id": user.sub }};
-    const response = await fetch(url, payload);
-    const data: IFavorite[] = await response.json();
-    setFavorites(data);
-  };
 
   const removeFavorite = async (imageUrl: string) => {
     if (!user || !user.sub) return false;
@@ -37,7 +29,7 @@ const FavoritesList = () => {
   return (
     <>
       <div>
-        {favorites.map((image) => {
+        {favorites?.map((image) => {
           return (
             <div key={image.url}>
               <img key={image.url} src={image.url} alt={image.title} />
@@ -52,7 +44,6 @@ const FavoritesList = () => {
           );
         })}
       </div>
-      <button onClick={getFavorites}>Get favorites</button>
     </>
   );
 };
