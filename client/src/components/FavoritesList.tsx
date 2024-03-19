@@ -8,7 +8,7 @@ const FavoritesList = () => {
 
   return (
     <>
-      <section>
+      <section className="favoritesList">
         {favorites?.map((image) => {
           return (
             <div key={image.url}>

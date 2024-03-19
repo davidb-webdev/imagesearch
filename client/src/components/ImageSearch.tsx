@@ -62,7 +62,7 @@ const ImageSearch = () => {
         <section className="searchResults">
           {searchResponse.items.map((result) => {
             return (
-              <div key={result.link} className="resultDiv">
+              <div key={result.link}>
                 <img src={result.link} alt={result.title} />
                 <button
                   onClick={async () => {
