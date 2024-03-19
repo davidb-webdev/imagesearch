@@ -3,6 +3,7 @@ import ISearchResponse from "../models/ISearchResponse";
 import Favorite from "../models/Favorite";
 import "../styles/ImageSearch.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { postFavorite } from "../services/favoritesService";
 
 const ImageSearch = () => {
   const { user } = useAuth0();
@@ -26,28 +27,6 @@ const ImageSearch = () => {
     const data: ISearchResponse = await response.json();
     console.log(data);
     setSearchResponse(data);
-  };
-
-  const addFavorite = async (
-    title: string,
-    byteSize: number,
-    imageUrl: string
-  ) => {
-    if (!user || !user.sub) return false;
-    const url = import.meta.env.VITE_BACKEND_BASE_URL + "/favorites/add";
-    const body = new Favorite(title, byteSize, imageUrl);
-    const payload = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "user-id": user.sub
-      },
-      body: JSON.stringify(body)
-    };
-
-    const response = await fetch(url, payload);
-    const data = await response.json();
-    console.log(data);
   };
 
   return (
@@ -91,8 +70,11 @@ const ImageSearch = () => {
             <div key={result.link} className="resultDiv">
               <img src={result.link} alt={result.title} />
               <button
-                onClick={() => {
-                  addFavorite(result.title, result.image.byteSize, result.link);
+                onClick={async () => {
+                  if (!user || !user.sub) return false;
+                  const favorite = new Favorite(result.title, result.image.byteSize, result.link);
+                  const data = await postFavorite(user.sub, favorite);
+                  console.log(data);
                 }}
               >
                 Save to favorites

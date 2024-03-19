@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import IFavorite from "../models/IFavorite";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getFavorites } from "../services/favoritesService";
 
 const useFavorites = () => {
   const [favorites, setFavorites] = useState<IFavorite[] | undefined>();
   const { user } = useAuth0();
   if (!user || !user.sub) return;
-  const url = import.meta.env.VITE_BACKEND_BASE_URL + "/favorites/";
-  const payload = { headers: { "user-id": user.sub } };
 
   useEffect(() => {
     if (favorites) return;
-
+    
     const getData = async () => {
-      const response = await fetch(url, payload);
-      const data: IFavorite[] = await response.json();
+      const data = await getFavorites(user.sub!);
       if (shouldUpdate) setFavorites(data);
     };
 
