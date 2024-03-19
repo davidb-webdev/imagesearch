@@ -7,6 +7,18 @@ const FavoritesList = () => {
   const favorites = useFavorites();
   const { user } = useAuth0();
 
+  const removeFavorite = async (url: string) => {
+    if (!user || !user.sub) return false;
+    try {
+      const data = await deleteFavorite(user.sub, url);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+    // Pseudo: setFavorites(...favorites, splice out removed item));
+  };
+
   return (
     <>
       {favorites && (
@@ -17,9 +29,7 @@ const FavoritesList = () => {
                 <img key={image.url} src={image.url} alt={image.title} />
                 <button
                   onClick={async () => {
-                    if (!user || !user.sub) return false;
-                    const data = await deleteFavorite(user.sub, image.url);
-                    console.log(data);
+                    removeFavorite(image.url);
                   }}
                 >
                   Remove favorite
