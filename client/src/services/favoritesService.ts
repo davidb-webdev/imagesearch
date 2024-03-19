@@ -12,7 +12,7 @@ export const getFavorites = async (user: string) => {
 };
 
 export const postFavorite = async (user: string, favorite: Favorite) => {
-  const url = import.meta.env.VITE_BACKEND_BASE_URL + "/favorites/add";
+  const url = baseUrl + "/favorites/add";
   const payload = {
     method: "POST",
     headers: {
@@ -37,7 +37,6 @@ export const deleteFavorite = async (user: string, imageUrl: string) => {
     },
     body: JSON.stringify(body)
   };
-
   const response = await fetch(url, payload);
   const data: string = await response.json();
   return data;

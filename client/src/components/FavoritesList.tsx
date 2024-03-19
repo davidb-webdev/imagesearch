@@ -8,7 +8,7 @@ const FavoritesList = () => {
 
   return (
     <>
-      <div>
+      <section>
         {favorites?.map((image) => {
           return (
             <div key={image.url}>
@@ -25,7 +25,7 @@ const FavoritesList = () => {
             </div>
           );
         })}
-      </div>
+      </section>
     </>
   );
 };
