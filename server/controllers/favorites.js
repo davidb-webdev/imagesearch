@@ -31,7 +31,7 @@ const addFavorite = async (req, res) => {
       }
     }
 
-    favorites.push({ user: req.headers["user-id"], favoriteImages: req.body });
+    favorites.push({ user: req.headers["user-id"], favoriteImages: [req.body] });
     await writeFavorites(favorites);
     res.status(200).json("Favorite added");
   }
