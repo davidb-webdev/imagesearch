@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import IFavorite from "../models/IFavorite";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getFavorites } from "../services/favoritesService";
+import Favorite from "../models/Favorite";
 
 const useFavorites = () => {
-  const [favorites, setFavorites] = useState<IFavorite[]>();
+  const [favorites, setFavorites] = useState<Favorite[]>([]);
   const { user } = useAuth0();
-  if (!user || !user.sub) return;
+  if (!user || !user.sub) return [];
 
   useEffect(() => {
-    if (favorites) return;
+    if (favorites.length > 0) return;
 
     const getData = async () => {
       const data = await getFavorites(user.sub!);
@@ -23,6 +23,7 @@ const useFavorites = () => {
       shouldUpdate = false;
     };
   });
+  console.log(favorites);
   return favorites;
 };
 

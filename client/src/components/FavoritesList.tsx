@@ -1,45 +1,28 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import useFavorites from "../hooks/useFavorites";
-import { deleteFavorite } from "../services/favoritesService";
 import "../styles/FavoritesList.css";
-import Url from "../models/Url";
+import { FavoritesContext } from "../contexts/FavoritesContext";
+import { useContext } from "react";
 
 const FavoritesList = () => {
-  const favorites = useFavorites();
-  const { user } = useAuth0();
-
-  const removeFavorite = async (url: Url) => {
-    if (!user || !user.sub) return false;
-    try {
-      const data = await deleteFavorite(user.sub, url);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-      return;
-    }
-    // Pseudo: setFavorites(...favorites, splice out removed item));
-  };
+  const { favorites, removeFavorite } = useContext(FavoritesContext);
 
   return (
     <>
-      {favorites && (
-        <section className="favoritesList">
-          {favorites.map((image) => {
-            return (
-              <div key={image.url}>
-                <img key={image.url} src={image.url} alt={image.title} />
-                <button
-                  onClick={async () => {
-                    removeFavorite(new Url(image.url));
-                  }}
-                >
-                  Remove favorite
-                </button>
-              </div>
-            );
-          })}
-        </section>
-      )}
+      <section className="favoritesList">
+        {favorites?.map((favorite) => {
+          return (
+            <div key={favorite.url}>
+              <img src={favorite.url} alt={favorite.title} />
+              <button
+                onClick={() => {
+                  removeFavorite(favorite.url);
+                }}
+              >
+                ❌
+              </button>
+            </div>
+          );
+        })}
+      </section>
     </>
   );
 };
