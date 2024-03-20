@@ -1,4 +1,5 @@
 import ISearchResponse from "../models/ISearchResponse";
+import { fetchData } from "./serviceBase";
 
 export const getSearchResponse = async (query: string) => {
   const url =
@@ -9,7 +10,6 @@ export const getSearchResponse = async (query: string) => {
     import.meta.env.VITE_GCS_SEARCH_ENGINE_ID +
     "&q=" +
     query;
-  const response = await fetch(url);
-  const data: ISearchResponse = await response.json();
+  const data = await fetchData<ISearchResponse>("GET", url);
   return data;
 };
