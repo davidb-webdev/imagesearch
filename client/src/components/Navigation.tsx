@@ -9,7 +9,7 @@ const Navigation = () => {
       <NavLink to="/search">Search</NavLink>
       <NavLink to="/favorites">
         Favorites
-        {favorites && <> ({favorites.length})</>}
+        {favorites && favorites.length > 0 && <> ({favorites.length})</>}
       </NavLink>
     </nav>
   );

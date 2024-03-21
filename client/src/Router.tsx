@@ -16,8 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Splash />,
-        index: true
+        element: <Splash />
       },
       {
         element: <AuthenticationGuard component={FavoritesProvider} />,
