@@ -5,13 +5,16 @@ import { FavoritesContext } from "../contexts/FavoritesContext";
 const Navigation = () => {
   const { favorites } = useContext(FavoritesContext);
   return (
-    <nav>
-      <NavLink to="/search">Search</NavLink>
-      <NavLink to="/favorites">
-        Favorites
-        {favorites && favorites.length > 0 && <> ({favorites.length})</>}
-      </NavLink>
-    </nav>
+    <>
+      <nav>
+        <NavLink to="/search">Search</NavLink>
+        <NavLink to="/favorites">
+          Favorites
+          {favorites && favorites.length > 0 && <> ({favorites.length})</>}
+        </NavLink>
+        <NavLink to="/profile">Profile</NavLink>
+      </nav>
+    </>
   );
 };
 

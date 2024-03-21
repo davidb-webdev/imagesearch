@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "./pages/Layout";
-import NotFound from "./pages/NotFound";
-import Search from "./pages/Search";
 import Splash from "./pages/Splash";
+import NotFound from "./pages/NotFound";
+import Layout from "./pages/Layout";
+import Search from "./pages/Search";
 import Favorites from "./pages/Favorites";
-import FavoritesProvider from "./components/FavoritesProvider";
+import Profile from "./pages/Profile";
 import Callback from "./pages/Callback";
-import AuthenticationGuard from "./components/AuthenticationGuard";
 import Auth0ProviderWithNavigate from "./components/Auth0ProviderWithNavigate";
+import FavoritesProvider from "./components/FavoritesProvider";
+import AuthenticationGuard from "./components/AuthenticationGuard";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
               {
                 path: "/favorites",
                 element: <Favorites />
+              },
+              {
+                path: "/profile",
+                element: <Profile />
               }
             ]
           }
