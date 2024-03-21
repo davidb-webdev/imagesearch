@@ -1,19 +1,15 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Profile from "../components/Profile";
 import LoginCheck from "../components/LoginCheck";
 import "../styles/Layout.css";
 import LogoutButton from "../components/LogoutButton";
+import Navigation from "../components/Navigation";
 
 const Layout = () => {
   return (
     <>
       <header>
-        <nav>
-          <NavLink to="/">Home</NavLink>
-          <LoginCheck>
-            <NavLink to="/favorites">Favorites</NavLink>
-          </LoginCheck>
-        </nav>
+        <Navigation />
 
         <div className="userLinks">
           <LoginCheck promptLogin>

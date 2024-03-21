@@ -1,6 +1,4 @@
-import IFavorite from "./IFavorite";
-
-export default class Favorite implements IFavorite {
+export default class Favorite {
   constructor(
     public title: string,
     public byteSize: number,

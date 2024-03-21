@@ -69,7 +69,7 @@ body {
 	}
 
 	main {
-		min-height: calc(100vh - var(--header-height));
+		min-height: calc(100dvh - var(--header-height));
 		padding: var(--default-spacing);
 		background-color: var(--dark-bg-color);
 
