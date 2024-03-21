@@ -1,0 +1,25 @@
+:root {
+  /* Dimensions */
+  --header-height: 5rem;
+  --default-spacing: 1rem;
+  --half-spacing: calc(var(--default-spacing) / 2);
+  --page-max-width: 75rem;
+  --border-radius: 3px;
+
+  /* Colors */
+  --text-color: #fff;
+  --light-bg-color: #29231f;
+  --dark-bg-color: #221d1a;
+  --accent-color: #d45d14;
+
+  /* Timing */
+  --quick: 0.15s;
+
+  /* Stacking order */
+  --z-content: 0;
+  --z-above: 1;
+  --z-modal: 2;
+
+  /* Fonts */
+  --font-body: "Poppins", sans-serif;
+}

@@ -11,8 +11,8 @@ const ImageSearch = () => {
     useContext(FavoritesContext);
 
   return (
-    <>
-      <form>
+    <div className="ImageSearch">
+      <form className="searchForm">
         <input
           type="search"
           onChange={(e) => {
@@ -28,7 +28,7 @@ const ImageSearch = () => {
             setSearchResponse(data);
           }}
         >
-          Search
+          🔍
         </button>
       </form>
 
@@ -90,7 +90,7 @@ const ImageSearch = () => {
           })}
         </section>
       )}
-    </>
+    </div>
   );
 };
 
