@@ -11,11 +11,7 @@ import IFavoritesContext from "../models/IFavoritesContext";
 import Favorite from "../models/Favorite";
 import { Outlet } from "react-router-dom";
 
-// interface IFavoritesContextContainerProps {
-//   children: JSX.Element;
-// }
-
-const FavoritesProvider = (/*{children}: IFavoritesContextContainerProps*/) => {
+const FavoritesProvider = () => {
   const { user } = useAuth0();
 
   const [favoritesState, setFavoritesState] = useState<IFavoritesContext>({
