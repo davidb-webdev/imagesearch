@@ -9,15 +9,13 @@ import {
 import Url from "../models/Url";
 import IFavoritesContext from "../models/IFavoritesContext";
 import Favorite from "../models/Favorite";
+import { Outlet } from "react-router-dom";
 
-interface IFavoritesContextContainerProps {
-  children: JSX.Element;
-}
+// interface IFavoritesContextContainerProps {
+//   children: JSX.Element;
+// }
 
-const FavoritesContextContainer = ({
-  children
-}: IFavoritesContextContainerProps) => {
-  document.title = "Favorites – ImageSearch";
+const FavoritesProvider = (/*{children}: IFavoritesContextContainerProps*/) => {
   const { user } = useAuth0();
 
   const [favoritesState, setFavoritesState] = useState<IFavoritesContext>({
@@ -85,9 +83,9 @@ const FavoritesContextContainer = ({
 
   return (
     <FavoritesContext.Provider value={favoritesState}>
-      {children}
+      <Outlet />
     </FavoritesContext.Provider>
   );
 };
 
-export default FavoritesContextContainer;
+export default FavoritesProvider;
