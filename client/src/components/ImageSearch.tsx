@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ISearchResponse from "../models/ISearchResponse";
-import Favorite from "../models/Favorite";
-import { useAuth0 } from "@auth0/auth0-react";
-import { postFavorite } from "../services/favoritesService";
 import { getSearchResponse } from "../services/searchService";
 import "../styles/ImageSearch.css";
+import { FavoritesContext } from "../contexts/FavoritesContext";
 
 const ImageSearch = () => {
-  const { user } = useAuth0();
   const [searchResponse, setSearchResponse] = useState<ISearchResponse>();
   const [query, setQuery] = useState<string>("");
+  const { favorites, addFavorite, removeFavorite } =
+    useContext(FavoritesContext);
 
   return (
     <>
@@ -64,22 +63,28 @@ const ImageSearch = () => {
             return (
               <div key={result.link}>
                 <img src={result.link} alt={result.title} />
-                <button
-                  onClick={async () => {
-                    if (!user || !user.sub) return false;
-                    const data = await postFavorite(
-                      user.sub,
-                      new Favorite(
+
+                {favorites?.some((favorite) => favorite.url === result.link) ? (
+                  <button
+                    onClick={() => {
+                      removeFavorite(result.link);
+                    }}
+                  >
+                    ♥
+                  </button>
+                ) : (
+                  <button
+                    onClick={async () => {
+                      addFavorite(
                         result.title,
                         result.image.byteSize,
                         result.link
-                      )
-                    );
-                    console.log(data);
-                  }}
-                >
-                  Save to favorites
-                </button>
+                      );
+                    }}
+                  >
+                    ♡
+                  </button>
+                )}
               </div>
             );
           })}
