@@ -12,7 +12,17 @@ const ImageSearch = () => {
 
   return (
     <div className="ImageSearch">
-      <form className="searchForm">
+      <form
+        className="searchForm"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const target = e.target as HTMLFormElement;
+          console.log(target.querySelector("input")?.blur());
+          const data = await getSearchResponse(query);
+          console.log(data);
+          setSearchResponse(data);
+        }}
+      >
         <input
           type="search"
           onChange={(e) => {
@@ -20,16 +30,7 @@ const ImageSearch = () => {
           }}
           value={query}
         />
-        <button
-          onClick={async (e) => {
-            e.preventDefault();
-            const data = await getSearchResponse(query);
-            console.log(data);
-            setSearchResponse(data);
-          }}
-        >
-          🔍
-        </button>
+        <button>🔍</button>
       </form>
 
       {searchResponse?.searchInformation && (
