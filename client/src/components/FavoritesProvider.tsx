@@ -75,9 +75,9 @@ const FavoritesProvider = () => {
     }
     setFavoritesState({
       ...favoritesState,
-      favorites: favoritesState.favorites!.concat(
-        new Favorite(title, byteSize, url)
-      )
+      favorites: favoritesState.favorites
+        ? favoritesState.favorites.concat(new Favorite(title, byteSize, url))
+        : [new Favorite(title, byteSize, url)]
     });
   };
 

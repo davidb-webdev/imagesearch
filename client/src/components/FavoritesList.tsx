@@ -10,7 +10,7 @@ const FavoritesList = () => {
 
   return (
     <>
-      {favorites ? (
+      {favorites && favorites?.length > 0 ? (
         <Mosaic>
           {favorites?.map((favorite) => {
             return (
