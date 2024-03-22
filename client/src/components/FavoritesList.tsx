@@ -8,7 +8,6 @@ const FavoritesList = () => {
 
   return (
     <>
-      <h1>Favorites</h1>
       <Mosaic>
         {favorites?.map((favorite) => {
           return (

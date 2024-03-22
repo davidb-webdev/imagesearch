@@ -6,7 +6,7 @@ import Mosaic from "./Mosaic";
 import MosaicItem from "./MosaicItem";
 import SearchForm from "./SearchForm";
 
-const ImageSearch = () => {
+const SearchApp = () => {
   const [searchResponse, setSearchResponse] = useState<ISearchResponse>();
   const [query, setQuery] = useState<string>("");
   const { favorites, addFavorite, removeFavorite } =
@@ -51,7 +51,7 @@ const ImageSearch = () => {
         </section>
       )}
 
-      {searchResponse && (
+      {searchResponse ? (
         <Mosaic>
           {searchResponse.items.map((result) => {
             const checkIfFavorite = favorites?.some(
@@ -76,9 +76,11 @@ const ImageSearch = () => {
             );
           })}
         </Mosaic>
+      ) : (
+        <p>No results</p>
       )}
     </div>
   );
 };
 
-export default ImageSearch;
+export default SearchApp;

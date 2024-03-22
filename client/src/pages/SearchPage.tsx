@@ -1,11 +1,11 @@
-import ImageSearch from "../components/ImageSearch";
+import SearchApp from "../components/SearchApp";
 
 const SearchPage = () => {
   document.title = "ImageSearch";
 
   return (
     <>
-      <ImageSearch />
+      <SearchApp />
     </>
   );
 };
