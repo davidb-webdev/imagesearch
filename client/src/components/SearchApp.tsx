@@ -5,6 +5,13 @@ import { FavoritesContext } from "../contexts/FavoritesContext";
 import Mosaic from "./Mosaic";
 import MosaicItem from "./MosaicItem";
 import SearchForm from "./SearchForm";
+import styled from "styled-components";
+
+const SearchAppContainer = styled.div`
+  .centeredText {
+    text-align: center;
+  }
+`;
 
 const SearchApp = () => {
   const [searchResponse, setSearchResponse] = useState<ISearchResponse>();
@@ -13,7 +20,7 @@ const SearchApp = () => {
     useContext(FavoritesContext);
 
   return (
-    <div className="ImageSearch">
+    <SearchAppContainer className="centeredForm">
       <SearchForm
         query={query}
         updateQuery={(newQuery) => {
@@ -46,40 +53,41 @@ const SearchApp = () => {
             }}
           >
             {searchResponse.spelling.correctedQuery}
-          </button>
+          </button>{" "}
           ?
         </section>
       )}
 
-      {searchResponse ? (
-        <Mosaic>
-          {searchResponse.items.map((result) => {
-            const checkIfFavorite = favorites?.some(
-              (favorite) => favorite.url === result.link
-            );
-            return (
-              <MosaicItem
-                key={result.link}
-                itemId={result.link}
-                itemTitle={result.title}
-                buttonLabel={checkIfFavorite ? "♥" : "♡"}
-                buttonClickHandler={() => {
-                  checkIfFavorite
-                    ? removeFavorite(result.link)
-                    : addFavorite(
-                        result.title,
-                        result.image.byteSize,
-                        result.link
-                      );
-                }}
-              />
-            );
-          })}
-        </Mosaic>
-      ) : (
-        <p>No results</p>
-      )}
-    </div>
+      {searchResponse &&
+        (searchResponse.items ? (
+          <Mosaic>
+            {searchResponse.items.map((result) => {
+              const checkIfFavorite = favorites?.some(
+                (favorite) => favorite.url === result.link
+              );
+              return (
+                <MosaicItem
+                  key={result.link}
+                  itemId={result.link}
+                  itemTitle={result.title}
+                  buttonLabel={checkIfFavorite ? "♥" : "♡"}
+                  buttonClickHandler={() => {
+                    checkIfFavorite
+                      ? removeFavorite(result.link)
+                      : addFavorite(
+                          result.title,
+                          result.image.byteSize,
+                          result.link
+                        );
+                  }}
+                />
+              );
+            })}
+          </Mosaic>
+        ) : (
+          <p className="centeredText">No results</p>
+        ))}
+    </SearchAppContainer>
   );
 };
 

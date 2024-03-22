@@ -25,7 +25,7 @@ const LayoutContainer = styled.div`
     grid-template-columns: minmax(auto, calc(var(--page-max-width)));
     grid-auto-rows: min-content;
     justify-content: center;
-    align-items: top;
+    align-items: start;
   }
 `;
 

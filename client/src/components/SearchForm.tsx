@@ -15,10 +15,13 @@ const SearchFormContainer = styled.form`
   }
 `;
 
-const SearchForm = ({ query, updateQuery, submitSearch }: ISearchFormProps) => {
+const SearchForm = ({
+  query,
+  updateQuery,
+  submitSearch
+}: ISearchFormProps) => {
   return (
     <SearchFormContainer
-      className="searchForm"
       onSubmit={(e) => {
         e.preventDefault();
         const target = e.target as HTMLFormElement;
