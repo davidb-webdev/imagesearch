@@ -5,31 +5,31 @@ import { FavoritesContext } from "../contexts/FavoritesContext";
 import Mosaic from "./Mosaic";
 import MosaicItem from "./MosaicItem";
 import SearchForm from "./SearchForm";
-import styled from "styled-components";
-
-const SearchAppContainer = styled.div`
-  .centeredText {
-    text-align: center;
-  }
-`;
+import { ErrorMessageContext } from "../contexts/ErrorMessageContext";
 
 const SearchApp = () => {
   const [searchResponse, setSearchResponse] = useState<ISearchResponse>();
   const [query, setQuery] = useState<string>("");
   const { favorites, addFavorite, removeFavorite } =
     useContext(FavoritesContext);
+  const { setErrorMessage } = useContext(ErrorMessageContext);
 
   return (
-    <SearchAppContainer className="centeredForm">
+    <>
       <SearchForm
         query={query}
         updateQuery={(newQuery) => {
           setQuery(newQuery);
         }}
         submitSearch={async () => {
-          const data = await getSearchResponse(query);
-          console.log(data);
-          setSearchResponse(data);
+          try {
+            const data = await getSearchResponse(query);
+            console.log(data);
+            setSearchResponse(data);
+          } catch (error) {
+            console.error(error);
+            setErrorMessage(String(error));
+          }
         }}
       />
 
@@ -85,9 +85,9 @@ const SearchApp = () => {
             })}
           </Mosaic>
         ) : (
-          <p className="centeredText">No results</p>
+          <p>No results</p>
         ))}
-    </SearchAppContainer>
+    </>
   );
 };
 

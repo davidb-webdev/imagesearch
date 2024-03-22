@@ -10,6 +10,7 @@ import Auth0ProviderWithNavigate from "./components/Auth0ProviderWithNavigate";
 import FavoritesProvider from "./components/FavoritesProvider";
 import AuthenticationGuard from "./components/AuthenticationGuard";
 import LayoutCentered from "./pages/LayoutCentered";
+import ErrorMessageProvider from "./components/ErrorMessageProvider";
 
 const router = createBrowserRouter([
   {
@@ -26,26 +27,31 @@ const router = createBrowserRouter([
         ]
       },
       {
-        element: <AuthenticationGuard component={FavoritesProvider} />,
+        element: <ErrorMessageProvider />,
         children: [
           {
-            element: <Layout />,
+            element: <AuthenticationGuard component={FavoritesProvider} />,
             children: [
               {
-                path: "/callback",
-                element: <CallbackPage />
-              },
-              {
-                path: "/search",
-                element: <SearchPage />
-              },
-              {
-                path: "/favorites",
-                element: <FavoritesPage />
-              },
-              {
-                path: "/profile",
-                element: <ProfilePage />
+                element: <Layout />,
+                children: [
+                  {
+                    path: "/callback",
+                    element: <CallbackPage />
+                  },
+                  {
+                    path: "/search",
+                    element: <SearchPage />
+                  },
+                  {
+                    path: "/favorites",
+                    element: <FavoritesPage />
+                  },
+                  {
+                    path: "/profile",
+                    element: <ProfilePage />
+                  }
+                ]
               }
             ]
           }
