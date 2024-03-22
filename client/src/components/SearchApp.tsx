@@ -20,9 +20,13 @@ const SearchApp = () => {
           setQuery(newQuery);
         }}
         submitSearch={async () => {
-          const data = await getSearchResponse(query);
-          console.log(data);
-          setSearchResponse(data);
+          try {
+            const data = await getSearchResponse(query);
+            console.log(data);
+            setSearchResponse(data);
+          } catch (error) {
+            console.error(error);
+          }
         }}
       />
 
