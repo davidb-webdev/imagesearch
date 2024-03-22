@@ -2,18 +2,22 @@ import styled from "styled-components";
 
 interface IMosaicItemProps {
   itemId: string;
-	itemTitle: string;
+  itemTitle: string;
   buttonLabel: string;
   buttonClickHandler: () => void;
 }
 
 const MosaicItemContainer = styled.div`
   position: relative;
+  overflow: hidden;
+  display: flex;
 
   img {
     width: 100%;
     height: 100%;
+    max-height: 250px;
     object-fit: cover;
+    object-position: 50% 25%;
     border-radius: var(--border-radius);
   }
 
@@ -37,7 +41,7 @@ const MosaicItemContainer = styled.div`
 
 const MosaicItem = ({
   itemId,
-	itemTitle,
+  itemTitle,
   buttonLabel,
   buttonClickHandler
 }: IMosaicItemProps) => {
@@ -45,11 +49,7 @@ const MosaicItem = ({
     <MosaicItemContainer>
       <img src={itemId} alt={itemTitle} />
 
-      <button
-        onClick={buttonClickHandler}
-      >
-        {buttonLabel}
-      </button>
+      <button onClick={buttonClickHandler}>{buttonLabel}</button>
     </MosaicItemContainer>
   );
 };

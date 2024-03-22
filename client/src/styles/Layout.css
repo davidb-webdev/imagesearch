@@ -18,6 +18,10 @@ button {
   font-size: 1rem;
 }
 
+section {
+  margin: var(--default-spacing) 0;
+}
+
 #root {
   header {
     width: 100%;
@@ -52,10 +56,9 @@ button {
   }
 
   main {
-    /* min-height: calc(90dvh - var(--header-height)); */
     min-height: 100dvh;
     padding: var(--default-spacing);
-    padding-bottom: var(--header-height);
+    padding-bottom: calc(var(--header-height) + var(--default-spacing));
 
     display: grid;
     grid-template-columns: minmax(auto, calc(var(--page-max-width)));

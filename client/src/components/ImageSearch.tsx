@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import ISearchResponse from "../models/ISearchResponse";
 import { getSearchResponse } from "../services/searchService";
-import "../styles/ImageSearch.css";
 import { FavoritesContext } from "../contexts/FavoritesContext";
 import Mosaic from "./Mosaic";
 import MosaicItem from "./MosaicItem";
+import SearchForm from "./SearchForm";
 
 const ImageSearch = () => {
   const [searchResponse, setSearchResponse] = useState<ISearchResponse>();
@@ -14,26 +14,17 @@ const ImageSearch = () => {
 
   return (
     <div className="ImageSearch">
-      <form
-        className="searchForm"
-        onSubmit={async (e) => {
-          e.preventDefault();
-          const target = e.target as HTMLFormElement;
-          console.log(target.querySelector("input")?.blur());
+      <SearchForm
+        query={query}
+        updateQuery={(newQuery) => {
+          setQuery(newQuery);
+        }}
+        submitSearch={async () => {
           const data = await getSearchResponse(query);
           console.log(data);
           setSearchResponse(data);
         }}
-      >
-        <input
-          type="search"
-          onChange={(e) => {
-            setQuery(e.target.value);
-          }}
-          value={query}
-        />
-        <button>🔍</button>
-      </form>
+      />
 
       {searchResponse?.searchInformation && (
         <section>

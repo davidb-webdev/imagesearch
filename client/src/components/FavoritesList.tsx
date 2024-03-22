@@ -1,4 +1,3 @@
-import "../styles/FavoritesList.css";
 import { FavoritesContext } from "../contexts/FavoritesContext";
 import { useContext } from "react";
 import Mosaic from "./Mosaic";
