@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-bg-dark);
+}
+
+h1 {
+  margin: 0;
+  font: var(--font-size-headline) var(--font-cursive);
+}
+
+input {
+  font-family: var(--font-body);
+}
+
+button {
+  background-color: var(--color-text);
+}
+
+input,
+button {
+  border: none;
+  border-radius: var(--radius-full);
+  padding: var(--spacing-quarter) var(--spacing-default);
+  font-size: var(--font-size-body);
+  color: var(--color-bg-dark);
+}
+
+section {
+  margin: var(--spacing-default) 0;
+}

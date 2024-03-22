@@ -1,0 +1,30 @@
+:root {
+  /* Dimensions */
+  --header-height: 5rem;
+  --page-max-width: 75rem;
+  --spacing-default: 1rem;
+  --spacing-half: calc(var(--spacing-default) / 2);
+  --spacing-quarter: calc(var(--spacing-default) / 4);
+  --radius-default: 3px;
+  --radius-full: 2em;
+
+  /* Colors */
+  --color-text: #fff5f5;
+  --color-bg-light: #29231f;
+  --color-bg-dark: #221d1a;
+  --color-accent: #d45d14;
+
+  /* Timing */
+  --timing-quick: 0.15s;
+
+  /* Stacking order */
+  --z-content: 0;
+  --z-above: 1;
+  --z-modal: 2;
+
+  /* Text */
+  --font-body: "Poppins", sans-serif;
+  --font-cursive: "Playball", cursive;
+  --font-size-headline: 2.5rem;
+  --font-size-body: 1rem;
+}

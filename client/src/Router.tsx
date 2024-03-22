@@ -1,23 +1,29 @@
 import { createBrowserRouter } from "react-router-dom";
+import SplashPage from "./pages/SplashPage";
+import ErrorPage from "./pages/ErrorPage";
 import Layout from "./pages/Layout";
-import NotFound from "./pages/NotFound";
-import Search from "./pages/Search";
-import Splash from "./pages/Splash";
-import Favorites from "./pages/Favorites";
-import FavoritesProvider from "./components/FavoritesProvider";
-import Callback from "./pages/Callback";
-import AuthenticationGuard from "./components/AuthenticationGuard";
+import SearchPage from "./pages/SearchPage";
+import FavoritesPage from "./pages/FavoritesPage";
+import ProfilePage from "./pages/ProfilePage";
+import CallbackPage from "./pages/CallbackPage";
 import Auth0ProviderWithNavigate from "./components/Auth0ProviderWithNavigate";
+import FavoritesProvider from "./components/FavoritesProvider";
+import AuthenticationGuard from "./components/AuthenticationGuard";
+import LayoutCentered from "./pages/LayoutCentered";
 
 const router = createBrowserRouter([
   {
     element: <Auth0ProviderWithNavigate />,
-    errorElement: <NotFound />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
-        element: <Splash />,
-        index: true
+        element: <LayoutCentered />,
+        children: [
+          {
+            path: "/",
+            element: <SplashPage />
+          }
+        ]
       },
       {
         element: <AuthenticationGuard component={FavoritesProvider} />,
@@ -27,15 +33,19 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/callback",
-                element: <Callback />
+                element: <CallbackPage />
               },
               {
                 path: "/search",
-                element: <Search />
+                element: <SearchPage />
               },
               {
                 path: "/favorites",
-                element: <Favorites />
+                element: <FavoritesPage />
+              },
+              {
+                path: "/profile",
+                element: <ProfilePage />
               }
             ]
           }
