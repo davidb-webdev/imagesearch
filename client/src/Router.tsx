@@ -9,6 +9,7 @@ import CallbackPage from "./pages/CallbackPage";
 import Auth0ProviderWithNavigate from "./components/Auth0ProviderWithNavigate";
 import FavoritesProvider from "./components/FavoritesProvider";
 import AuthenticationGuard from "./components/AuthenticationGuard";
+import LayoutCentered from "./pages/LayoutCentered";
 
 const router = createBrowserRouter([
   {
@@ -16,8 +17,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
-        element: <SplashPage />
+        element: <LayoutCentered />,
+        children: [
+          {
+            path: "/",
+            element: <SplashPage />
+          }
+        ]
       },
       {
         element: <AuthenticationGuard component={FavoritesProvider} />,
