@@ -3,6 +3,8 @@ import ISearchResponse from "../models/ISearchResponse";
 import { getSearchResponse } from "../services/searchService";
 import "../styles/ImageSearch.css";
 import { FavoritesContext } from "../contexts/FavoritesContext";
+import Mosaic from "./Mosaic";
+import MosaicItem from "./MosaicItem";
 
 const ImageSearch = () => {
   const [searchResponse, setSearchResponse] = useState<ISearchResponse>();
@@ -59,37 +61,30 @@ const ImageSearch = () => {
       )}
 
       {searchResponse && (
-        <section className="searchResults">
+        <Mosaic>
           {searchResponse.items.map((result) => {
+            const checkIfFavorite = favorites?.some(
+              (favorite) => favorite.url === result.link
+            );
             return (
-              <div key={result.link}>
-                <img src={result.link} alt={result.title} />
-
-                {favorites?.some((favorite) => favorite.url === result.link) ? (
-                  <button
-                    onClick={() => {
-                      removeFavorite(result.link);
-                    }}
-                  >
-                    ♥
-                  </button>
-                ) : (
-                  <button
-                    onClick={async () => {
-                      addFavorite(
+              <MosaicItem
+                key={result.link}
+                itemId={result.link}
+                itemTitle={result.title}
+                buttonLabel={checkIfFavorite ? "♥" : "♡"}
+                buttonClickHandler={() => {
+                  checkIfFavorite
+                    ? removeFavorite(result.link)
+                    : addFavorite(
                         result.title,
                         result.image.byteSize,
                         result.link
                       );
-                    }}
-                  >
-                    ♡
-                  </button>
-                )}
-              </div>
+                }}
+              />
             );
           })}
-        </section>
+        </Mosaic>
       )}
     </div>
   );

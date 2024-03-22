@@ -1,28 +1,29 @@
 import "../styles/FavoritesList.css";
 import { FavoritesContext } from "../contexts/FavoritesContext";
 import { useContext } from "react";
+import Mosaic from "./Mosaic";
+import MosaicItem from "./MosaicItem";
 
 const FavoritesList = () => {
   const { favorites, removeFavorite } = useContext(FavoritesContext);
 
   return (
     <>
-      <section className="favoritesList">
+      <Mosaic>
         {favorites?.map((favorite) => {
           return (
-            <div key={favorite.url}>
-              <img src={favorite.url} alt={favorite.title} />
-              <button
-                onClick={() => {
-                  removeFavorite(favorite.url);
-                }}
-              >
-                ❌
-              </button>
-            </div>
+            <MosaicItem
+              key={favorite.url}
+              itemId={favorite.url}
+              itemTitle={favorite.title}
+              buttonLabel="❌"
+              buttonClickHandler={() => {
+                removeFavorite(favorite.url);
+              }}
+            />
           );
         })}
-      </section>
+      </Mosaic>
     </>
   );
 };
