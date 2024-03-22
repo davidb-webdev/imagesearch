@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import Splash from "./pages/Splash";
-import NotFound from "./pages/NotFound";
+import SplashPage from "./pages/SplashPage";
+import ErrorPage from "./pages/ErrorPage";
 import Layout from "./pages/Layout";
-import Search from "./pages/Search";
-import Favorites from "./pages/Favorites";
-import Profile from "./pages/Profile";
-import Callback from "./pages/Callback";
+import SearchPage from "./pages/SearchPage";
+import FavoritesPage from "./pages/FavoritesPage";
+import ProfilePage from "./pages/ProfilePage";
+import CallbackPage from "./pages/CallbackPage";
 import Auth0ProviderWithNavigate from "./components/Auth0ProviderWithNavigate";
 import FavoritesProvider from "./components/FavoritesProvider";
 import AuthenticationGuard from "./components/AuthenticationGuard";
@@ -13,11 +13,11 @@ import AuthenticationGuard from "./components/AuthenticationGuard";
 const router = createBrowserRouter([
   {
     element: <Auth0ProviderWithNavigate />,
-    errorElement: <NotFound />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
-        element: <Splash />
+        element: <SplashPage />
       },
       {
         element: <AuthenticationGuard component={FavoritesProvider} />,
@@ -27,19 +27,19 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/callback",
-                element: <Callback />
+                element: <CallbackPage />
               },
               {
                 path: "/search",
-                element: <Search />
+                element: <SearchPage />
               },
               {
                 path: "/favorites",
-                element: <Favorites />
+                element: <FavoritesPage />
               },
               {
                 path: "/profile",
-                element: <Profile />
+                element: <ProfilePage />
               }
             ]
           }

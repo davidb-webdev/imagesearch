@@ -1,6 +1,6 @@
 import LoginButton from "../components/LoginButton";
 
-const Splash = () => {
+const SplashPage = () => {
   document.title = "ImageSearch";
 
   return (
@@ -11,4 +11,4 @@ const Splash = () => {
   );
 };
 
-export default Splash;
+export default SplashPage;

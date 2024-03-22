@@ -1,6 +1,6 @@
 import ImageSearch from "../components/ImageSearch";
 
-const Search = () => {
+const SearchPage = () => {
   document.title = "ImageSearch";
 
   return (
@@ -10,4 +10,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchPage;

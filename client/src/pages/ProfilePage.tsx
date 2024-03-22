@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "../components/LogoutButton";
 
-const Profile = () => {
+const ProfilePage = () => {
   const { user } = useAuth0();
 
   return (
@@ -13,4 +13,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;
