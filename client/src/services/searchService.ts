@@ -10,6 +10,10 @@ export const getSearchResponse = async (query: string) => {
     import.meta.env.VITE_GCS_SEARCH_ENGINE_ID +
     "&q=" +
     query;
-  const data = await fetchData<ISearchResponse>("GET", url);
-  return data;
+  try {
+    const data = await fetchData<ISearchResponse>("GET", url);
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };

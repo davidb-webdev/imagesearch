@@ -32,7 +32,7 @@ const FavoritesProvider = () => {
             favorites: data
           });
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     let shouldUpdate = true;
@@ -48,7 +48,7 @@ const FavoritesProvider = () => {
       const data = await deleteFavorite(user.sub, new Url(url));
       console.log(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     setFavoritesState({
       ...favoritesState,
@@ -65,20 +65,23 @@ const FavoritesProvider = () => {
   ) => {
     try {
       if (!user || !user.sub) return false;
+
       const data = await postFavorite(
         user.sub,
         new Favorite(title, byteSize, url)
       );
+
       console.log(data);
+
+      setFavoritesState({
+        ...favoritesState,
+        favorites: favoritesState.favorites
+          ? favoritesState.favorites.concat(new Favorite(title, byteSize, url))
+          : [new Favorite(title, byteSize, url)]
+      });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-    setFavoritesState({
-      ...favoritesState,
-      favorites: favoritesState.favorites
-        ? favoritesState.favorites.concat(new Favorite(title, byteSize, url))
-        : [new Favorite(title, byteSize, url)]
-    });
   };
 
   return (

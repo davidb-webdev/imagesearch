@@ -8,8 +8,12 @@ export const getFavorites = async (user: string) => {
   const url = baseUrl + "/favorites/";
   const headers = { "user-id": user };
 
-  const data = await fetchData<Favorite[]>("GET", url, headers);
-  return data;
+  try {
+    const data = await fetchData<Favorite[]>("GET", url, headers);
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const postFavorite = async (user: string, favorite: Favorite) => {
@@ -17,8 +21,12 @@ export const postFavorite = async (user: string, favorite: Favorite) => {
   const headers = { "Content-Type": "application/json", "user-id": user };
   const body = JSON.stringify(favorite);
 
-  const data = await fetchData<string>("POST", url, headers, body);
-  return data;
+  try {
+    const data = await fetchData<string>("POST", url, headers, body);
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const deleteFavorite = async (user: string, imageUrl: Url) => {
@@ -26,6 +34,10 @@ export const deleteFavorite = async (user: string, imageUrl: Url) => {
   const headers = { "Content-Type": "application/json", "user-id": user };
   const body = JSON.stringify(imageUrl);
 
-  const data = await fetchData<string>("DELETE", url, headers, body);
-  return data;
+  try {
+    const data = await fetchData<string>("DELETE", url, headers, body);
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
