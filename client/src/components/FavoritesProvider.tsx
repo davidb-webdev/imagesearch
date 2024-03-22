@@ -24,12 +24,16 @@ const FavoritesProvider = () => {
     if (!user || !user.sub || favoritesState.favorites) return;
 
     const getData = async () => {
-      const data = await getFavorites(user.sub!);
-      if (shouldUpdate)
-        setFavoritesState({
-          ...favoritesState,
-          favorites: data
-        });
+      try {
+        const data = await getFavorites(user.sub!);
+        if (shouldUpdate && data.length > 0)
+          setFavoritesState({
+            ...favoritesState,
+            favorites: data
+          });
+      } catch (error) {
+        console.log(error);
+      }
     };
     let shouldUpdate = true;
     getData();

@@ -6,23 +6,29 @@ import MosaicItem from "./MosaicItem";
 const FavoritesList = () => {
   const { favorites, removeFavorite } = useContext(FavoritesContext);
 
+  console.log(favorites);
+
   return (
     <>
-      <Mosaic>
-        {favorites?.map((favorite) => {
-          return (
-            <MosaicItem
-              key={favorite.url}
-              itemId={favorite.url}
-              itemTitle={favorite.title}
-              buttonLabel="x"
-              buttonClickHandler={() => {
-                removeFavorite(favorite.url);
-              }}
-            />
-          );
-        })}
-      </Mosaic>
+      {favorites ? (
+        <Mosaic>
+          {favorites?.map((favorite) => {
+            return (
+              <MosaicItem
+                key={favorite.url}
+                itemId={favorite.url}
+                itemTitle={favorite.title}
+                buttonLabel="x"
+                buttonClickHandler={() => {
+                  removeFavorite(favorite.url);
+                }}
+              />
+            );
+          })}
+        </Mosaic>
+      ) : (
+        "No favorites"
+      )}
     </>
   );
 };

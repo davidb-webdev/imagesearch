@@ -16,7 +16,7 @@ const getFavorites = async (req, res) => {
       return res.status(200).json(userObject.favoriteImages);
     }
   }
-  res.status(404).json("User not found");
+  res.status(200).json([]);
 };
 
 const addFavorite = async (req, res) => {
