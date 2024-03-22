@@ -5,12 +5,14 @@ import { FavoritesContext } from "../contexts/FavoritesContext";
 import Mosaic from "./Mosaic";
 import MosaicItem from "./MosaicItem";
 import SearchForm from "./SearchForm";
+import { ErrorMessageContext } from "../contexts/ErrorMessageContext";
 
 const SearchApp = () => {
   const [searchResponse, setSearchResponse] = useState<ISearchResponse>();
   const [query, setQuery] = useState<string>("");
   const { favorites, addFavorite, removeFavorite } =
     useContext(FavoritesContext);
+  const { setErrorMessage } = useContext(ErrorMessageContext);
 
   return (
     <>
@@ -26,6 +28,7 @@ const SearchApp = () => {
             setSearchResponse(data);
           } catch (error) {
             console.error(error);
+            setErrorMessage(String(error));
           }
         }}
       />

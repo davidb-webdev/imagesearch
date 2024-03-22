@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FavoritesContext } from "../contexts/FavoritesContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
@@ -10,9 +10,11 @@ import Url from "../models/Url";
 import IFavoritesContext from "../models/IFavoritesContext";
 import Favorite from "../models/Favorite";
 import { Outlet } from "react-router-dom";
+import { ErrorMessageContext } from "../contexts/ErrorMessageContext";
 
 const FavoritesProvider = () => {
   const { user } = useAuth0();
+  const { setErrorMessage } = useContext(ErrorMessageContext);
 
   const [favoritesState, setFavoritesState] = useState<IFavoritesContext>({
     favorites: undefined,
@@ -33,6 +35,7 @@ const FavoritesProvider = () => {
           });
       } catch (error) {
         console.error(error);
+        setErrorMessage(String(error));
       }
     };
     let shouldUpdate = true;
@@ -49,6 +52,7 @@ const FavoritesProvider = () => {
       console.log(data);
     } catch (error) {
       console.error(error);
+      setErrorMessage(String(error));
     }
     setFavoritesState({
       ...favoritesState,
@@ -81,6 +85,7 @@ const FavoritesProvider = () => {
       });
     } catch (error) {
       console.error(error);
+      setErrorMessage(String(error));
     }
   };
 
