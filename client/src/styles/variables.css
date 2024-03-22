@@ -1,25 +1,30 @@
 :root {
   /* Dimensions */
   --header-height: 5rem;
-  --default-spacing: 1rem;
-  --half-spacing: calc(var(--default-spacing) / 2);
   --page-max-width: 75rem;
-  --border-radius: 3px;
+  --spacing-default: 1rem;
+  --spacing-half: calc(var(--spacing-default) / 2);
+  --spacing-quarter: calc(var(--spacing-default) / 4);
+  --radius-default: 3px;
+  --radius-full: 2em;
 
   /* Colors */
-  --text-color: #fff;
-  --light-bg-color: #29231f;
-  --dark-bg-color: #221d1a;
-  --accent-color: #d45d14;
+  --color-text: #fff5f5;
+  --color-bg-light: #29231f;
+  --color-bg-dark: #221d1a;
+  --color-accent: #d45d14;
 
   /* Timing */
-  --quick: 0.15s;
+  --timing-quick: 0.15s;
 
   /* Stacking order */
   --z-content: 0;
   --z-above: 1;
   --z-modal: 2;
 
-  /* Fonts */
+  /* Text */
   --font-body: "Poppins", sans-serif;
+  --font-cursive: "Playball", cursive;
+  --font-size-headline: 2.5rem;
+  --font-size-body: 1rem;
 }

@@ -5,29 +5,42 @@
 body {
   margin: 0;
   font-family: var(--font-body);
-  color: var(--text-color);
-  background-color: var(--dark-bg-color);
+  color: var(--color-text);
+  background-color: var(--color-bg-dark);
+}
+
+h1 {
+  margin: 0;
+  font: var(--font-size-headline) var(--font-cursive);
 }
 
 input {
   font-family: var(--font-body);
 }
 
+button {
+  background-color: var(--color-text);
+}
+
 input,
 button {
-  font-size: 1rem;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: var(--spacing-quarter) var(--spacing-default);
+  font-size: var(--font-size-body);
+  color: var(--color-bg-dark);
 }
 
 section {
-  margin: var(--default-spacing) 0;
+  margin: var(--spacing-default) 0;
 }
 
 #root {
   header {
     width: 100%;
     height: var(--header-height);
-    padding: var(--default-spacing);
-    background-color: var(--light-bg-color);
+    padding: var(--spacing-default);
+    background-color: var(--color-bg-light);
     display: grid;
     justify-content: center;
     grid-template-columns: minmax(auto, calc(var(--page-max-width)));
@@ -39,30 +52,31 @@ section {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      gap: var(--default-spacing);
+      gap: var(--spacing-default);
       height: 100%;
     }
 
     a {
-      color: var(--text-color);
+      color: var(--color-text);
       text-decoration: none;
-      transition: color var(--quick);
+      transition: color var(--timing-quick);
 
       &:hover,
       &.active {
-        color: var(--accent-color);
+        color: var(--color-accent);
       }
     }
   }
 
   main {
     min-height: 100dvh;
-    padding: var(--default-spacing);
-    padding-bottom: calc(var(--header-height) + var(--default-spacing));
+    padding: var(--spacing-default);
+    padding-bottom: calc(var(--header-height) + var(--spacing-default));
 
     display: grid;
     grid-template-columns: minmax(auto, calc(var(--page-max-width)));
+    grid-auto-rows: min-content;
     justify-content: center;
-    align-items: center;
+    align-items: top;
   }
 }

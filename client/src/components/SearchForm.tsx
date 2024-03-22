@@ -8,7 +8,7 @@ interface ISearchFormProps {
 
 const SearchFormContainer = styled.form`
   display: flex;
-  gap: var(--half-spacing);
+  gap: var(--spacing-half);
 
   input {
     flex-grow: 1;

@@ -7,7 +7,7 @@ interface IMosaicProps {
 const MosaicContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: var(--half-spacing);
+  grid-gap: var(--spacing-half);
 
   @media (min-width: 900px) {
     grid-template-columns: repeat(3, 1fr);

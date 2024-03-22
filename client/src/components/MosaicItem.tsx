@@ -9,7 +9,6 @@ interface IMosaicItemProps {
 
 const MosaicItemContainer = styled.div`
   position: relative;
-  overflow: hidden;
   display: flex;
 
   img {
@@ -18,24 +17,24 @@ const MosaicItemContainer = styled.div`
     max-height: 250px;
     object-fit: cover;
     object-position: 50% 25%;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius-default);
   }
 
   button {
     position: absolute;
-    bottom: var(--half-spacing);
-    right: var(--half-spacing);
-    background-color: var(--dark-bg-color);
-    padding: var(--half-spacing);
+    bottom: var(--spacing-half);
+    right: var(--spacing-half);
+    background-color: var(--color-bg-dark);
+    padding: var(--spacing-half);
     border-radius: 100%;
-    width: 1em;
-    height: 1em;
+    width: 1rem;
+    height: 1rem;
     line-height: 1;
     box-sizing: content-box;
     -webkit-user-select: none;
     user-select: none;
     border: none;
-    color: var(--text-color);
+    color: var(--color-text);
   }
 `;
 

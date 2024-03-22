@@ -8,6 +8,7 @@ const FavoritesList = () => {
 
   return (
     <>
+      <h1>Favorites</h1>
       <Mosaic>
         {favorites?.map((favorite) => {
           return (
@@ -15,7 +16,7 @@ const FavoritesList = () => {
               key={favorite.url}
               itemId={favorite.url}
               itemTitle={favorite.title}
-              buttonLabel="❌"
+              buttonLabel="x"
               buttonClickHandler={() => {
                 removeFavorite(favorite.url);
               }}
