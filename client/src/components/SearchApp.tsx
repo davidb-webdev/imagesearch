@@ -5,13 +5,6 @@ import { FavoritesContext } from "../contexts/FavoritesContext";
 import Mosaic from "./Mosaic";
 import MosaicItem from "./MosaicItem";
 import SearchForm from "./SearchForm";
-import styled from "styled-components";
-
-const SearchAppContainer = styled.div`
-  .centeredText {
-    text-align: center;
-  }
-`;
 
 const SearchApp = () => {
   const [searchResponse, setSearchResponse] = useState<ISearchResponse>();
@@ -20,7 +13,7 @@ const SearchApp = () => {
     useContext(FavoritesContext);
 
   return (
-    <SearchAppContainer className="centeredForm">
+    <>
       <SearchForm
         query={query}
         updateQuery={(newQuery) => {
@@ -85,9 +78,9 @@ const SearchApp = () => {
             })}
           </Mosaic>
         ) : (
-          <p className="centeredText">No results</p>
+          <p>No results</p>
         ))}
-    </SearchAppContainer>
+    </>
   );
 };
 
