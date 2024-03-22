@@ -1,5 +1,5 @@
 const CallbackPage = () => {
-	return "";
+	return;
 }
 
 export default CallbackPage;
