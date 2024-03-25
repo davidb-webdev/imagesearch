@@ -18,7 +18,7 @@ const ErrorMessageProvider = () => {
     setTimeout(
       () =>
         setErrorMessageState({ ...errorMessageState, errorMessage: undefined }),
-      3000
+      5000
     );
   };
 
