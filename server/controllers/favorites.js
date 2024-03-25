@@ -10,13 +10,16 @@ const writeFavorites = async (content) => {
 };
 
 const getFavorites = async (req, res) => {
-  const favorites = await readFavorites();
-  for (const userObject of favorites) {
-    if (userObject.user === req.headers["user-id"]) {
-      return res.status(200).json(userObject.favoriteImages);
+  if (req.headers["user-id"]) {
+    const favorites = await readFavorites();
+    for (const userObject of favorites) {
+      if (userObject.user === req.headers["user-id"]) {
+        return res.status(200).json(userObject.favoriteImages);
+      }
     }
+    res.status(200).json([]);
   }
-  res.status(200).json([]);
+  res.status(401).json("Unauthorized");
 };
 
 const addFavorite = async (req, res) => {
@@ -31,7 +34,10 @@ const addFavorite = async (req, res) => {
       }
     }
 
-    favorites.push({ user: req.headers["user-id"], favoriteImages: [req.body] });
+    favorites.push({
+      user: req.headers["user-id"],
+      favoriteImages: [req.body]
+    });
     await writeFavorites(favorites);
     res.status(200).json("Favorite added");
   }
@@ -39,19 +45,22 @@ const addFavorite = async (req, res) => {
 };
 
 const removeFavorite = async (req, res) => {
-  let favorites = await readFavorites();
-  for (const userObject of favorites) {
-    if (userObject.user === req.headers["user-id"]) {
-      userObject.favoriteImages = userObject.favoriteImages.filter(
-        (userFavorite) => {
-          return userFavorite.url !== req.body.url;
-        }
-      );
-      await writeFavorites(favorites);
-      return res.status(200).json("Favorite removed");
+  if (req.headers["user-id"]) {
+    let favorites = await readFavorites();
+    for (const userObject of favorites) {
+      if (userObject.user === req.headers["user-id"]) {
+        userObject.favoriteImages = userObject.favoriteImages.filter(
+          (userFavorite) => {
+            return userFavorite.url !== req.body.url;
+          }
+        );
+        await writeFavorites(favorites);
+        return res.status(200).json("Favorite removed");
+      }
     }
+    res.status(404).json("Favorite not found");
   }
-  res.status(404).json("Favorite not found");
+  res.status(401).json("Unauthorized");
 };
 
 module.exports = { getFavorites, addFavorite, removeFavorite };
