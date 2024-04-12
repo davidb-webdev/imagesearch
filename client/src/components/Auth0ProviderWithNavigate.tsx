@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 const Auth0ProviderWithNavigate = () => {
   const navigate = useNavigate();
-  const redirectUri = import.meta.env.VITE_AUTH0_CALLBACK_URL;
+  const redirectUri = import.meta.env.VITE_FRONTEND_BASE_URL + "/callback";
 
   const onRedirectCallback = (appState: any) => {
     navigate(appState?.returnTo || window.location.pathname);

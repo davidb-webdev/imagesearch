@@ -3,7 +3,7 @@ import { fetchData } from "./serviceBase";
 
 export const getSearchResponse = async (query: string) => {
   const url =
-    import.meta.env.VITE_GCS_BASE_URL +
+    "https://customsearch.googleapis.com/customsearch/v1?searchType=image" +
     "&key=" +
     import.meta.env.VITE_GCS_KEY +
     "&cx=" +

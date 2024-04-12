@@ -14,4 +14,4 @@ app.use(express.json());
 app.use("/favorites", favoritesRouter);
 
 // Listeners
-app.listen(port, () => console.log("Server running!"));
+app.listen(port || 3000, () => console.log("Server running!"));
